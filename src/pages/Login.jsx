@@ -13,8 +13,8 @@ import {object,string} from "yup"
 
 const Login = () => {
   const loginSchema=object({
-email: string().email,
-password: string().required,
+email: string().email("Lütfen geçerli email giriniz").required(),
+password: string().required().min(8).max(16),
   })
     return (
     <Container maxWidth="lg">
@@ -63,7 +63,7 @@ actions.resetForm()
 actions.setSubmitting(false)
   
 }}>
-  {({isSubmitting,handleChange,values,touched,errors})=>(
+  {({isSubmitting,handleChange,handleBlur,values,touched,errors})=>(
     <Form>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}
           >
@@ -76,7 +76,8 @@ actions.setSubmitting(false)
               onChange={handleChange}
               value={values.email}
               error={touched.email && Boolean(errors.email)}
-              helperText={errors.email}
+              onBlur={handleBlur}
+              helperText={touched.email && errors.email}
             />
             <TextField
               label="password"
@@ -86,7 +87,9 @@ actions.setSubmitting(false)
               variant="outlined"
               onChange={handleChange}
               value={values.password}
-              helperText={errors.password}
+              error={touched.password && Boolean(errors.password)}
+              onBlur={handleBlur}
+              helperText={touched.password && errors.password}
             />
             <Button variant="contained" type="submit" disabled={isSubmitting}>
               Submit
