@@ -13,7 +13,7 @@ import {object,string} from "yup"
 
 const Login = () => {
   const loginSchema=object({
-email: string().email("Lütfen geçerli email giriniz").required(),
+email: string().email("Lütfen geçerli email giriniz").required("email zorunludur"),
 password: string().required("Şifre zorunludur").min(8, "Şifre en az 8 karakter olmalıdır").max(16, "Şifre en fazla 16 karakter olmaldır").matches(/[a-z]+/, "Şifre en az bir küçük harf içermelidir").matches(/[A-Z]+/, "Şifre en az bir büyük harf içermelidir").matches(/[@$!%*?&/]+/, "Şifre en az bir özel karakter içermelidir"),
   })
     return (
@@ -77,7 +77,7 @@ actions.setSubmitting(false)
               value={values.email}
               error={touched.email && Boolean(errors.email)}
               onBlur={handleBlur}
-              helperText={touched.email && errors.email}
+              helperText={errors.email}
             />
             <TextField
               label="password"
@@ -89,7 +89,7 @@ actions.setSubmitting(false)
               value={values.password}
               error={touched.password && Boolean(errors.password)}
               onBlur={handleBlur}
-              helperText={touched.password && errors.password}
+              helperText={errors.password}
             />
             <Button variant="contained" type="submit" disabled={isSubmitting}>
               Submit
