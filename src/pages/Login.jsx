@@ -8,8 +8,14 @@ import { Link } from "react-router-dom"
 import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField"
 import { Button } from "@mui/material"
+import {Formik,Form} from "formik"
+import {object,string} from "yup"
 
 const Login = () => {
+  const loginSchema=object({
+email: string().email,
+password: string().required,
+  })
     return (
     <Container maxWidth="lg">
       <Grid
@@ -46,10 +52,20 @@ const Login = () => {
           >
             Login
           </Typography>
+<Formik
+initialValues={{email:"",password:""}}
+validationSchema={loginSchema}
+onSubmit={(values,actions)=>{
 
-          <Box
-            component="form"
-            sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+
+
+actions.resetForm()
+actions.setSubmitting(false)
+  
+}}>
+  {({isSubmitting,handleChange,values,touched,errors})=>(
+    <Form>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}
           >
             <TextField
               label="Email"
@@ -57,6 +73,10 @@ const Login = () => {
               id="email"
               type="email"
               variant="outlined"
+              onChange={handleChange}
+              value={values.email}
+              error={touched.email && Boolean(errors.email)}
+              helperText={errors.email}
             />
             <TextField
               label="password"
@@ -64,11 +84,19 @@ const Login = () => {
               id="password"
               type="password"
               variant="outlined"
+              onChange={handleChange}
+              value={values.password}
+              helperText={errors.password}
             />
-            <Button variant="contained" type="submit">
+            <Button variant="contained" type="submit" disabled={isSubmitting}>
               Submit
             </Button>
-          </Box>
+          </Box></Form>
+  )}
+  
+
+</Formik>
+          
 
           <Box sx={{ textAlign: "center", mt: 2 }}>
             <Link to="/register">Do you have not an account?</Link>
