@@ -14,7 +14,7 @@ import {object,string} from "yup"
 const Login = () => {
   const loginSchema=object({
 email: string().email("Lütfen geçerli email giriniz").required(),
-password: string().required().min(8).max(16),
+password: string().required("Şifre zorunludur").min(8, "Şifre en az 8 karakter olmalıdır").max(16, "Şifre en fazla 16 karakter olmaldır").matches(/[a-z]+/, "Şifre en az bir küçük harf içermelidir").matches(/[A-Z]+/, "Şifre en az bir büyük harf içermelidir").matches(/[@$!%*?&/]+/, "Şifre en az bir özel karakter içermelidir"),
   })
     return (
     <Container maxWidth="lg">
