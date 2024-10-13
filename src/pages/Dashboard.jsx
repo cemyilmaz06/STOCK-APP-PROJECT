@@ -1,33 +1,4 @@
-// import React from "react"
-// import AppBar from "@mui/material/AppBar"
-// import Box from "@mui/material/Box"
-// import CssBaseline from "@mui/material/CssBaseline"
 
-// import Toolbar from "@mui/material/Toolbar"
-// import Button from "@mui/material/Button"
-// import Typography from "@mui/material/Typography"
-// import { useSelector } from "react-redux"
-// import useApiRequests from "../services/useApiRequests"
-
-// function Dashboard() {
-//   const {username}=useSelector(state=>state.auth)
-// const {logout}=useApiRequests()
-//   return (
-//     <Box sx={{ display: "flex" }}>
-//       <CssBaseline />
-//       <AppBar position="fixed">
-//         <Toolbar>
-//           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-//             STOCK APP
-//           </Typography>
-//           {username && <Button color="inherit" onClick={logout}>Logout</Button>}
-//         </Toolbar>
-//       </AppBar>
-//     </Box>
-//   )
-// }
-
-// export default Dashboard
 
 
 import * as React from "react"
@@ -43,7 +14,7 @@ import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 import { useSelector } from "react-redux"
 import useApiRequests from "../services/useApiRequests"
-// import MenuListItems from "../components/MenuListItems"
+import MenuListItems from "../components/MenuListItems"
 import { Outlet } from "react-router-dom"
 const drawerWidth = 200
 
@@ -73,7 +44,7 @@ function ResponsiveDrawer(props) {
     <div>
       <Toolbar />
       <Divider />
-      {/* <MenuListItems /> */}
+      <MenuListItems />
     </div>
   )
 
