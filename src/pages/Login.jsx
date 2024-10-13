@@ -10,6 +10,7 @@ import TextField from "@mui/material/TextField"
 import { Button } from "@mui/material"
 import {Formik,Form} from "formik"
 import {object,string} from "yup"
+import { login } from "../services/apiRequests"
 
 const Login = () => {
   const loginSchema=object({
@@ -56,7 +57,7 @@ password: string().required("Şifre zorunludur").min(8, "Şifre en az 8 karakter
 initialValues={{email:"",password:""}}
 validationSchema={loginSchema}
 onSubmit={(values,actions)=>{
-
+login(values)
 
 
 actions.resetForm()
