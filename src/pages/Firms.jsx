@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react'
 import useStockRequests from '../services/useStockRequests'
 
@@ -8,6 +7,7 @@ const {getStock}=useStockRequests()
 
 useEffect(()=>{
 getStock("firms")
+getStock("sales")
 },[])
 
   return (
