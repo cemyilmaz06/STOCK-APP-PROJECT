@@ -1,23 +1,19 @@
-import axios from 'axios'
-import { useDispatch, useSelector } from 'react-redux'
+
+import { useDispatch } from 'react-redux'
 import { fetchFail, fetchStart, getStockSuccess} from '../features/stockSlice'
+import useAxios from './useAxios'
 
 
 const useStockRequests = () => {
   const dispatch=useDispatch()
-    const {token}=useSelector(state=>state.auth)
+ const{axiosToken}=useAxios()
     const getStock = async (path) => {
         dispatch(fetchStart())
         try {
-          const { data } = await axios(
-            `${process.env.REACT_APP_BASE_URL}/${path}`,
-            {
-              headers: { Authorization: `Token ${token}` },
-            }
-          )
+          const { data } = await axiosToken.get(path)
         
           dispatch(getStockSuccess({ data: data.data, path }))
-          console.log(data)
+          
         } catch (error) {
           dispatch(fetchFail())
           console.log(error)
