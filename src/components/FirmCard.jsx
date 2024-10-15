@@ -7,8 +7,9 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Typography from '@mui/material/Typography';
 import EditIcon from '@mui/icons-material/Edit';
 import { butonStyle } from '../style/globalStyles';
+import useStockRequests from '../services/useStockRequests';
 export default function FirmCard({firm}) {
-   
+   const {deleteStock}=useStockRequests()
   return (
     <Card sx={{ maxWidth: 300,display:"flex",flexDirection:"column",width:"300",height:"400" ,justifyContent:"space-between",alignItems:"center",p:2}}>
       
@@ -31,7 +32,7 @@ export default function FirmCard({firm}) {
           {firm.phone}
         </Typography>
       <CardActions>
-       <DeleteOutlineIcon sx={butonStyle}/>
+       <DeleteOutlineIcon sx={butonStyle} onClick={()=>deleteStock("firms",firm._id)} />
        <EditIcon sx={butonStyle}/>
       </CardActions>
     </Card>

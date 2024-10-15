@@ -3,6 +3,7 @@ import useStockRequests from "../services/useStockRequests";
 import { Button, Grid, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import FirmCard from "../components/FirmCard";
+import FirmModal from "../components/FirmModal";
 
 const Firms = () => {
   const { getStock } = useStockRequests();
@@ -17,9 +18,9 @@ const Firms = () => {
         Firms
       </Typography>
       <Button variant="contained" sx={{mb:2}}>NEW FIRM</Button>
-
+<FirmModal/>
       <Grid container justifyContent={"center"} gap={2}>
-        {firms && firms.map((firm,index) => (
+        {firms.map((firm,index) => (
           <Grid item key={index}>
             <FirmCard firm={firm} />
           </Grid>
