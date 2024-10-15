@@ -16,14 +16,12 @@ const style = {
   p: 4,
 };
 
-export default function FirmModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+export default function FirmModal({handleClose,open}) {
+
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      
       <Modal
         open={open}
         onClose={handleClose}
