@@ -1,10 +1,12 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
 import { useState } from "react";
+
+import useStockRequests from "../services/useStockRequests";
 
 const style = {
   position: "absolute",
@@ -19,17 +21,20 @@ const style = {
 };
 
 export default function FirmModal({ handleClose, open }) {
-  const [data, setData] = useState({
-    image: "",
-    address: "",
-    phone: "",
-    name: "",
-  });
+  const {postStock}=useStockRequests()
+  const initialState={ image:"",address:"",phone:"",name:""}
+  const [data, setData] = useState({initialState});
 
   const handleChange=(e)=>{
     setData({...data, [e.target.name]: e.target.value})
   }
-  console.log(data);
+const  handleSubmit=(e)=>{
+e.preventDefault()
+postStock("firms",data)
+setData(initialState)
+handleClose()
+
+}
   return (
     <div>
       <Modal
@@ -39,7 +44,7 @@ export default function FirmModal({ handleClose, open }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }} component="form" onSubmit={handleSubmit}>
             <TextField
               label="Firm Name"
               name="name"
@@ -55,7 +60,7 @@ export default function FirmModal({ handleClose, open }) {
               id="phone"
               type="tel"
               variant="outlined"
-              value={data.address}
+              value={data.phone}
               onChange={handleChange}
             />
             <TextField
@@ -64,7 +69,7 @@ export default function FirmModal({ handleClose, open }) {
               id="address"
               type="text"
               variant="outlined"
-              value={data.phone}
+              value={data.address}
               onChange={handleChange}
             />
             <TextField
@@ -76,7 +81,7 @@ export default function FirmModal({ handleClose, open }) {
               value={data.image}
               onChange={handleChange}
             />
-            <Button variant="contained" type="submit">
+            <Button variant="contained" type="submit" >
               Submit
             </Button>
           </Box>
