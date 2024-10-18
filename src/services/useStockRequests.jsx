@@ -49,8 +49,20 @@ const useStockRequests = () => {
          
         }
       }
+      const putStock = async (path, data) => {
+        dispatch(fetchStart())
+        try {
+          await axiosToken.put(`${path}/${data._id}`, data)
+          toastSuccessNotify(`Güncelleme başarılı.`)
+          getStock(path)
+        } catch (error) {
+          dispatch(fetchFail())
+          toastErrorNotify("Güncelleme başarısız oldu.")
+          console.log(error)
+        }
+      }
   
-      return{getStock,deleteStock,postStock}
+      return{getStock,deleteStock,postStock,putStock}
 }
 
 export default useStockRequests

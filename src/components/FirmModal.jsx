@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
-import { useState } from "react";
+
 
 import useStockRequests from "../services/useStockRequests";
 
@@ -20,21 +20,29 @@ const style = {
   p: 4,
 };
 
-export default function FirmModal({ handleClose, open }) {
-  const {postStock}=useStockRequests()
-  const initialState={ image:"",address:"",phone:"",name:""}
-  const [data, setData] = useState({initialState});
+export default function FirmModal({ handleClose, open,data,setData }) {
+  const {postStock,putStock}=useStockRequests()
+
 
   const handleChange=(e)=>{
     setData({...data, [e.target.name]: e.target.value})
   }
-const  handleSubmit=(e)=>{
-e.preventDefault()
-postStock("firms",data)
-setData(initialState)
-handleClose()
+  const handleSubmit = (e) => {
+    e.preventDefault()
 
-}
+    if (data._id) {
+      //? put
+      putStock("firms", data)
+    } else {
+      //? post
+      postStock("firms", data)
+    }
+    //? Reset form
+    setData({ image: "", address: "", phone: "", name: "" })
+    //? close modal
+    handleClose()
+  }
+
   return (
     <div>
       <Modal
@@ -53,6 +61,7 @@ handleClose()
               variant="outlined"
               value={data.name}
               onChange={handleChange}
+              required
             />
             <TextField
               label="Phone"
@@ -62,6 +71,7 @@ handleClose()
               variant="outlined"
               value={data.phone}
               onChange={handleChange}
+              required
             />
             <TextField
               label="Address"
@@ -71,6 +81,7 @@ handleClose()
               variant="outlined"
               value={data.address}
               onChange={handleChange}
+              required
             />
             <TextField
               label="Image"
@@ -80,6 +91,7 @@ handleClose()
               variant="outlined"
               value={data.image}
               onChange={handleChange}
+              required
             />
             <Button variant="contained" type="submit" >
               Submit
