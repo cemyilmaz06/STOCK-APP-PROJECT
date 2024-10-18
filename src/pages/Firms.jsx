@@ -19,8 +19,8 @@ setData(initialState);
 
 
   useEffect(() => {
-    getStock("firms");
-  }, []);
+    getStock("firms")
+  }, [])
 
   return (
     <div>
