@@ -16,6 +16,7 @@ const useStockRequests = () => {
           dispatch(getStockSuccess({ data: data.data, path }))
           
         } catch (error) {
+          toastErrorNotify(`${path}  çekme işlemi başarısız`)
           dispatch(fetchFail())
           console.log(error)
         }

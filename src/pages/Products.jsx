@@ -6,12 +6,15 @@ import { useSelector } from "react-redux";
 
 import ProductModal from "../components/ProductModal";
 import ProductTable from "../components/ProductTable";
+import {  NoDataMessage, TableSkelthon } from "../components/Messages";
+
 
 const Products = () => {
   const { getStock } = useStockRequests();
+  const {error,loading}=useSelector((state)=>state.stock)
   const initialState={ categoryId:"",brandId:"",name:""}
   const [data, setData] = useState({initialState});
-  const { products } = useSelector((state) => state.stock);
+  const {products} = useSelector((state) => state.stock);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -23,6 +26,7 @@ setData(initialState);
   useEffect(() => {
     getStock("products")
     getStock("categories")
+    getStock("brands")
   }, [])
 
   return (
@@ -30,8 +34,12 @@ setData(initialState);
       <Typography variant="h5" color={"error"} mb={2}>
       Products
       </Typography>
-      <Button variant="contained" sx={{mb:2}} onClick={handleOpen}>NEW PRODUCT</Button>
-      <ProductTable/>
+      <Button variant="contained" sx={{mb:2}} onClick={handleOpen} disabled={error} >NEW PRODUCT</Button>
+{loading && <TableSkelthon/>}
+
+      {!products.length && <NoDataMessage/>}
+      {products.length > 0 && <ProductTable/>}
+   
 <ProductModal open={open}  handleClose={handleClose} data={data} setData={setData}/>
       
     </div>
