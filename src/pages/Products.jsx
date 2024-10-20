@@ -9,7 +9,7 @@ import ProductTable from "../components/ProductTable";
 
 const Products = () => {
   const { getStock } = useStockRequests();
-  const initialState={ image:"",address:"",phone:"",name:""}
+  const initialState={ categoryId:"",brandId:"",name:""}
   const [data, setData] = useState({initialState});
   const { products } = useSelector((state) => state.stock);
   const [open, setOpen] = useState(false);
@@ -22,6 +22,7 @@ setData(initialState);
 
   useEffect(() => {
     getStock("products")
+    getStock("categories")
   }, [])
 
   return (

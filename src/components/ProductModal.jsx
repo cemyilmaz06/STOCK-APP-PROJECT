@@ -4,9 +4,14 @@ import Button from "@mui/material/Button";
 
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 
 import useStockRequests from "../services/useStockRequests";
+import { useSelector } from "react-redux";
 
 const style = {
   position: "absolute",
@@ -22,7 +27,7 @@ const style = {
 
 export default function ProductModal({ handleClose, open,data,setData }) {
   const {postStock,putStock}=useStockRequests()
-
+const {categories}=useSelector((state)=>state.stock)
 
   const handleChange=(e)=>{
     setData({...data, [e.target.name]: e.target.value})
@@ -37,8 +42,7 @@ export default function ProductModal({ handleClose, open,data,setData }) {
       //? post
       postStock("firms", data)
     }
-    //? Reset form
-    setData({ image: "", address: "", phone: "", name: "" })
+   
     //? close modal
     handleClose()
   }
@@ -53,6 +57,20 @@ export default function ProductModal({ handleClose, open,data,setData }) {
       >
         <Box sx={style}>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }} component="form" onSubmit={handleSubmit}>
+          <FormControl fullWidth>
+  <InputLabel id="categories">Categories</InputLabel>
+  <Select
+    labelId="categories"
+    id="categories"
+   
+    label="categories"
+    onChange={handleChange}
+  >
+    {categories.map((item)=>(  <MenuItem value={item._id}>{item.name}</MenuItem>))}
+  
+    
+  </Select>
+</FormControl>
             <TextField
               label="Firm Name"
               name="name"
