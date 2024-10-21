@@ -15,21 +15,21 @@ export default function FirmCard({firm,handleOpen,setData}) {
       
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {firm.name}
+          {firm?.name}
         </Typography>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {firm.address}
+          {firm?.address}
         </Typography>
       </CardContent>
       <CardMedia
         component="img"
-        alt={firm.name}
+        alt={firm?.name}
         height="140"
-        image={firm.image}
+        image={firm?.image}
         sx={{objectFit:"contain"}}
       />
        <Typography variant="body2" sx={{ color: 'text.secondary',mt:"2" }}>
-          {firm.phone}
+          {firm?.phone}
         </Typography>
       <CardActions>
        <DeleteOutlineIcon sx={butonStyle} onClick={()=>deleteStock("firms",firm._id)} />
