@@ -35,10 +35,9 @@ setData(initialState);
       Products
       </Typography>
       <Button variant="contained" sx={{mb:2}} onClick={handleOpen} disabled={error} >NEW PRODUCT</Button>
-{loading && <TableSkelthon/>}
-
-      {!products.length && <NoDataMessage/>}
-      {products.length > 0 && <ProductTable/>}
+      {loading && <TableSkelthon />}
+      {!loading && !products.length && <NoDataMessage />}
+      {!loading && products.length > 0 && <ProductTable />}
    
 <ProductModal open={open}  handleClose={handleClose} data={data} setData={setData}/>
       
