@@ -4,7 +4,7 @@ import CardActions from "@mui/material/CardActions"
 import CardMedia from "@mui/material/CardMedia"
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline"
 import EditIcon from "@mui/icons-material/Edit"
-import { CardHeader } from "@mui/material"
+import { CardHeader, Container } from "@mui/material"
 import useStockRequests from "../services/useStockRequests"
 import { butonStyle } from "../style/globalStyles"
 
@@ -12,6 +12,7 @@ const BrandCard = ({ brand, handleOpen, setData }) => {
   const { deleteStock } = useStockRequests()
 
   return (
+    <Container>
     <Card
       elevation={10}
       sx={{
@@ -46,6 +47,7 @@ const BrandCard = ({ brand, handleOpen, setData }) => {
         />
       </CardActions>
     </Card>
+    </Container>
   )
 }
 

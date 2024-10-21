@@ -8,16 +8,27 @@ import Typography from '@mui/material/Typography';
 import EditIcon from '@mui/icons-material/Edit';
 import { butonStyle } from '../style/globalStyles';
 import useStockRequests from '../services/useStockRequests';
+import { Container } from '@mui/material';
 export default function FirmCard({firm,handleOpen,setData}) {
    const {deleteStock}=useStockRequests()
   return (
-    <Card sx={{ maxWidth: 300,display:"flex",flexDirection:"column",width:"300",height:"400" ,justifyContent:"space-between",alignItems:"center",p:2}}>
+    <Container>
+    <Card elevation={10}
+    sx={{
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      alignItems: "center",
+      width: 300,
+      height: 400,
+      p: 2,
+    }}>
       
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h5" component="div" sx={{textAlign:"center"}}>
           {firm?.name}
         </Typography>
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+        <Typography variant="body2" sx={{ color: 'text.secondary',textAlign:"center" }}>
           {firm?.address}
         </Typography>
       </CardContent>
@@ -38,5 +49,6 @@ export default function FirmCard({firm,handleOpen,setData}) {
         handleOpen()} }/>
       </CardActions>
     </Card>
+    </Container>
   );
 }
