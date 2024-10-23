@@ -87,11 +87,17 @@ const Charts = () => {
 
   return (
     <Stack
+    display={"flex"}
       justifyContent={"center"}
       alignItems={"center"}
-      flexDirection="column"
+      flexDirection="row"
       flexWrap={"wrap"}
+    
+   gap={2}
+  
+      
     >
+      
       <AreaChart
         className="h-80"
         data={salesData}
@@ -100,6 +106,8 @@ const Charts = () => {
         colors={["indigo"]}
         valueFormatter={dataFormatter}
         yAxisWidth={80}
+
+      
       />
       <AreaChart
         className="h-80"
@@ -109,6 +117,7 @@ const Charts = () => {
         colors={["red"]}
         valueFormatter={dataFormatter}
         yAxisWidth={80}
+      
       />
     </Stack>
   )
