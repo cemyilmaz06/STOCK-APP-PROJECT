@@ -92,8 +92,7 @@ const Charts = () => {
       alignItems={"center"}
       flexDirection="row"
       flexWrap={"wrap"}
-    
-   gap={2}
+      gap={2}
   
       
     >
@@ -106,9 +105,7 @@ const Charts = () => {
         colors={["indigo"]}
         valueFormatter={dataFormatter}
         yAxisWidth={80}
-
-      
-      />
+    />
       <AreaChart
         className="h-80"
         data={purchasesData}
